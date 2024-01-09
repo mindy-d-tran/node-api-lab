@@ -36,7 +36,17 @@ router
         return true;
       }
     });
-    if(comment) res.json(comment)
+    if (comment) res.json(comment);
+    else next();
+  })
+  .delete((req, res, next) => {
+    const comment = comments.find((c, i) => {
+      if (c.id == req.params.id) {
+        comments.splice(i, 1);
+        return true;
+      }
+    });
+    if (comment) res.json(comment);
     else next();
   });
 module.exports = router;
