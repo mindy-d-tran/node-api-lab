@@ -7,6 +7,7 @@ router
   .route("/")
   .get((req, res) => {
     const userID = req.query.userID;
+    // look for posts from a specific user
     if (userID) {
       const userPosts = [];
       posts.forEach((post) => {
