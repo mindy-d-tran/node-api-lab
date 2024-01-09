@@ -1,11 +1,25 @@
 const express = require("express");
 const router = express.Router();
 
-const comments = [];
+// dummy data
+const comments = [
+  { userId: 1, postId: 1, body: "owo" },
+  { userId: 2, postId: 1, body: "uwu" },
+  { userId: 2, postId: 2, body: "<3" },
+  { userId: 3, postId: 1, body: "cute"}
+];
 
 router
   .route("/")
   .get((req, res) => {
+    const userID = req.query.userId;
+    if (userID) {
+      const userComments = [];
+      comments.forEach((c) => {
+        if (c.userId == userID) userComments.push(c);
+      });
+      res.json(userComments);
+    }
     res.json(comments);
   })
   .post((req, res) => {
