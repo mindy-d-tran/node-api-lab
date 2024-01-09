@@ -20,5 +20,11 @@ router
       res.json(comments[comment.length - 1]);
     } else res.json({ error: "Insufficient data" });
   });
-
+router
+    .route('/:id')
+    .get((req,res,next)=>{
+        const comment = comments.find(c=> c.id == req.params.id);
+        if(comment) res.json(comment);
+        else next();
+    })
 module.exports = router;
