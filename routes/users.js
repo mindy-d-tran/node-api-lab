@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const users = require('../data/users');
+const posts = require('../data/posts');
+
 router
   .route("/")
   .get((req, res) => {
@@ -65,4 +67,14 @@ router
     else next();
   });
 
+// get all post from that one user
+router
+  .route('/:id/posts')
+  .get((req,res)=>{
+    const userPosts = [];
+    posts.find((post)=> {
+      if(post.userId == req.params.id) userPosts.push(post)
+    });
+    res.json(userPosts);
+  })
   module.exports = router;
