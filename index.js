@@ -11,6 +11,7 @@ const bodyParser = require("body-parser");
 /**importing routes*/
 const users = require("./routes/users");
 const posts = require("./routes/posts");
+const comments = require('./routes/comments');
 
 const error = require('./utilities/error');
 
@@ -62,10 +63,9 @@ app.use("/api", function (req, res, next) {
 
 /**creating simple get for apis
  * impratical for larger projects*/
-// users api
 app.use('/api/users', users)
-//post api
 app.use('/api/posts', posts)
+app.use('/api/comments', comments);
 
 // Adding some HATEOAS links.
 app.get("/", (req, res) => {
