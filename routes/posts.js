@@ -14,6 +14,7 @@ router
         if (post.userId == userID) userPosts.push(post);
       });
       res.json(userPosts);
+      return;
     } 
     res.json(posts);
   })
