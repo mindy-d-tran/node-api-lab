@@ -6,19 +6,26 @@ const comments = [
   { id: 1, userId: 1, postId: 1, body: "owo" },
   { id: 2, userId: 2, postId: 1, body: "uwu" },
   { id: 3, userId: 2, postId: 2, body: "<3" },
-  { id: 4, userId: 3, postId: 1, body: "cute"}
+  { id: 4, userId: 3, postId: 1, body: "cute" },
 ];
 
 router
   .route("/")
   .get((req, res) => {
-    const userID = req.query.userId;
-    if (userID) {
+    if (req.query.userId) {
       const userComments = [];
       comments.forEach((c) => {
-        if (c.userId == userID) userComments.push(c);
+        if (c.userId == req.query.userId) userComments.push(c);
       });
       res.json(userComments);
+      return;
+    }
+    if (req.query.postId) {
+      const postComments = [];
+      comments.forEach((c) => {
+        if (c.postId == req.query.postId) postComments.push(c);
+      });
+      res.json(postComments);
       return;
     }
     res.json(comments);
