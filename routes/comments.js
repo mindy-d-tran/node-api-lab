@@ -3,10 +3,10 @@ const router = express.Router();
 
 // dummy data
 const comments = [
-  { userId: 1, postId: 1, body: "owo" },
-  { userId: 2, postId: 1, body: "uwu" },
-  { userId: 2, postId: 2, body: "<3" },
-  { userId: 3, postId: 1, body: "cute"}
+  { id: 1, userId: 1, postId: 1, body: "owo" },
+  { id: 2, userId: 2, postId: 1, body: "uwu" },
+  { id: 3, userId: 2, postId: 2, body: "<3" },
+  { id: 4, userId: 3, postId: 1, body: "cute"}
 ];
 
 router
@@ -19,6 +19,7 @@ router
         if (c.userId == userID) userComments.push(c);
       });
       res.json(userComments);
+      return;
     }
     res.json(comments);
   })
