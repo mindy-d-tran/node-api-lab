@@ -21,10 +21,22 @@ router
     } else res.json({ error: "Insufficient data" });
   });
 router
-    .route('/:id')
-    .get((req,res,next)=>{
-        const comment = comments.find(c=> c.id == req.params.id);
-        if(comment) res.json(comment);
-        else next();
-    })
+  .route("/:id")
+  .get((req, res, next) => {
+    const comment = comments.find((c) => c.id == req.params.id);
+    if (comment) res.json(comment);
+    else next();
+  })
+  .patch((req, res, next) => {
+    const comment = comments.find((c, i) => {
+      if (c.id == req.params.id) {
+        for (const key in req.body) {
+          comments[i][key] = req.body[key];
+        }
+        return true;
+      }
+    });
+    if(comment) res.json(comment)
+    else next();
+  });
 module.exports = router;
