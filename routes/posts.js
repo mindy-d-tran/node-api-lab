@@ -1,11 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const posts = require('../data/posts');
+const posts = require("../data/posts");
 
 router
   .route("/")
   .get((req, res) => {
+    const userID = req.query.userID;
+    if (userID) {
+      const userPosts = [];
+      posts.forEach((post) => {
+        if (post.userId == userID) userPosts.push(post);
+      });
+      res.json(userPosts);
+    } 
     res.json(posts);
   })
   .post((req, res) => {
